@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app = "sharkApp">
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='css/bootstrap.css' />
+
+  </head>
+  <body ng-controller="MenuController">
+  <h1>Welcome to <%=title%></h1>
+  Please Login to use our app:
+  <button class="btn btn-primary" ng-click="auth(1)">Venture Capitalist</button>
+  <button class="btn btn-primary" ng-click="auth(2)">Entrepreneur</button>
+
+
+
+  <script src='jquery.js' ></script>
+  <script src='js/bootstrap.js' ></script>
+
+  <script src='/angular.js'></script>
+  <script type="text/javascript" src="//platform.linkedin.com/in.js">
+    api_key: <%= key %>
+            authorize: true
+  </script>
+  <script>
+    var myApp = angular.module('sharkApp', [ ]).controller('MenuController',function($scope, $http, $q){
+          $scope.auth = function(type){
+            switch(type) {
+              case 1:console.log('vc');
+                    break;
+              case 2:console.log('ent');
+                    break;
+            }
+            /*console.log('authorize: ', IN.User.isAuthorized());
+            if(!IN.User.isAuthorized()){
+              IN.User.authorize(function(){
+                //instead of window replace, use post?
+                console.log(IN.User);
+
+                //window.location.replace("/auth/authenticated");
+                console.log('success:', IN.User.isAuthorized());
+                IN.API.Raw("/people/~").result(function(data){
+                  console.log(data);
+                }).error(function(){
+                  console.log(err);
+                });*/window.location+='authorize/'+type+'/linkedin';
+                //$http.get('authorize/'+type+'/linkedin');//IN.User)
+             // });
+           // }
+          //  else $http.get('authenticated');
+
+
+
+          }
+    });
+
+  </script>
+  </body>
+</html>

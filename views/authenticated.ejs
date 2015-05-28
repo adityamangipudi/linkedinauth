@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app = "sharkApp">
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='http://localhost:3000/stylesheets/style.css' />
+    <link rel='stylesheet' href='http://localhost:3000/css/bootstrap.css' />
+
+</head>
+<body ng-controller="UserController">
+<h1>Welcome to <%=title%>'s Account</h1>
+<img class = "thumbnails" src="<%= profile %>" />
+
+<button class="btn btn-danger" ng-click="logout()">Logout</button>
+
+
+
+<script src='http://localhost:3000/jquery.js' ></script>
+<script src='http://localhost:3000/js/bootstrap.js' ></script>
+
+<script src='http://localhost:3000/angular.js'></script>
+<script type="text/javascript" src="//platform.linkedin.com/in.js">
+    api_key: <%= key %>
+            authorize: true
+</script>
+<script>
+    var myApp = angular.module('sharkApp', [ ]).controller('UserController',function($scope, $http, $q){
+        $scope.logout=function(){
+
+            IN.User.logout(function (){
+                console.log('document.cookie')
+                window.location ='http://localhost:3000/authorize/logout';
+
+                console.log('Good bye!');
+            });
+            // $http.get('/authorize/logout').success(function(){
+            //})
+        }
+    });
+
+</script>
+</body>
+</html>
